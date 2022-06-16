@@ -3,29 +3,46 @@
 List<string> wordList = new List<string>();
 
 GetWordList();
+DotNetSort();
+BubbleSort();
+
+
+void DotNetSort()
+{
+    Console.WriteLine("");
+
+    wordList.Sort();
+
+    foreach (string word in wordList)
+    {
+        Console.WriteLine("dotnet: " + word);
+    }
+}
 
 void BubbleSort()
 {
-    int[] arr = { 120, 29, 31, 78, 990, 1201 };
+    Console.WriteLine("");
 
-    int temp;
+    string temp;
 
-    for (int i = 0; i <= arr.Length - 2; i++)
+    for (int i = 0; i <= wordList.Count - 2; i++)
     {
-        for (int j = 0; j <= arr.Length - 2; j++)
+        for (int j = 0; j <= wordList.Count - 2; j++)
         {
-            if (arr[i] > arr[i + 1])
+            if (wordList[i].Length > wordList[i + 1].Length)
             {
-                temp = arr[i + 1];
-                arr[i + 1] = arr[i];
-                arr[i] = temp;
+                temp = wordList[i + 1];
+                wordList[i + 1] = wordList[i];
+                wordList[i] = temp;
             }
         }
     }
 
     Console.WriteLine("Sorted:");
-    foreach (int p in arr)
-        Console.Write(p + " ");
+    foreach (var p in wordList)
+    {
+        Console.WriteLine(p + " ");
+    }
     Console.Read();
 }
 
