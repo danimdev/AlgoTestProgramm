@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 
+char[] alphabet = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+
 List<string> wordList = new List<string>();
 
 GetWordList();
-DotNetSort();
+//DotNetSort();
 BubbleSort();
 
 //the standard dotnet algo
@@ -29,7 +31,7 @@ void BubbleSort()
     {
         for (int j = 0; j <= wordList.Count - 2; j++)
         {
-            if (wordList[i].Length > wordList[i + 1].Length)
+            if (wordList[i].First() == alphabet[i + 1])
             {
                 temp = wordList[i + 1];
                 wordList[i + 1] = wordList[i];
@@ -61,9 +63,9 @@ void GetWordList()
         }
     }
 
-    foreach (string s in wordList)
-    {
-        Console.WriteLine(s);
-    }
+    //foreach (string s in wordList)
+    //{
+    //    Console.WriteLine(s);
+    //}
 
 }
