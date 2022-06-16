@@ -6,7 +6,7 @@ GetWordList();
 DotNetSort();
 BubbleSort();
 
-
+//the standard dotnet algo
 void DotNetSort()
 {
     Console.WriteLine("");
