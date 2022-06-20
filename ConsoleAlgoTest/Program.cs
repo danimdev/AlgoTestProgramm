@@ -1,12 +1,31 @@
-﻿using System.Linq;
+﻿
+using System.Diagnostics;
 
-char[] alphabet = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+Stopwatch sw = new();
 
 List<string> wordList = new List<string>();
 
+bool firstRun = false;
+
 GetWordList();
-//DotNetSort();
-BubbleSort();
+
+for (int i = 0; i < 5; i++)
+{
+
+    //DotNetSort();
+    BubbleSort();
+
+    var rnd = new Random();
+    var randomized = wordList.OrderBy(item => rnd.Next());
+
+    if (i == 4)
+    {
+        Thread.Sleep(2000);
+        i = 0;
+        Console.Clear();
+    }
+
+}
 
 //the standard dotnet algo
 void DotNetSort()
@@ -23,43 +42,49 @@ void DotNetSort()
 
 void BubbleSort()
 {
+    sw.Start();
     Console.WriteLine("");
 
     string temp;
 
-    for (int i = 0; i <= wordList.Count - 2; i++)
+    for (int i = 0; i < wordList.Count - 1; i++)
     {
-        for (int j = 0; j <= wordList.Count - 2; j++)
+        for (int j = i + 1; j < wordList.Count; j++)
         {
-            if (wordList[i].First() == alphabet[i + 1])
+            if (wordList[j].CompareTo(wordList[i]) > 0)
             {
-                temp = wordList[i + 1];
-                wordList[i + 1] = wordList[i];
-                wordList[i] = temp;
+                temp = wordList[i];
+                wordList[i] = wordList[j];
+                wordList[j] = temp;
             }
         }
     }
 
-    Console.WriteLine("Sorted:");
-    foreach (var p in wordList)
+
+    sw.Stop();
+    TimeSpan ts = sw.Elapsed;
+    if(firstRun)
     {
-        Console.WriteLine(p + " ");
+        Console.WriteLine("Sort Time BubbleSort: " + ts.TotalMilliseconds);
     }
-    Console.Read();
+
+    sw.Restart();
+    firstRun = true;
+    //Console.Read();
 }
 
 void GetWordList()
 {
     string filename = "wordlist.txt";
-    FileStream stream = new FileStream(filename,FileMode.Open);
+    FileStream stream = new FileStream(filename, FileMode.Open);
 
-    using(StreamReader sr = new StreamReader(stream))
+    using (StreamReader sr = new StreamReader(stream))
     {
         string line;
-        
-        while((line = sr.ReadLine()) != null)
+
+        while ((line = sr.ReadLine()) != null)
         {
-            wordList.Add(line);
+            wordList.Add(line.ToLower());
         }
     }
 
