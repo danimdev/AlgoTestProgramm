@@ -9,22 +9,20 @@ bool firstRun = false;
 
 GetWordList();
 
-for (int i = 0; i < 5; i++)
+while (true)
 {
-
-    //DotNetSort();
-    BubbleSort();
-
-    var rnd = new Random();
-    var randomized = wordList.OrderBy(item => rnd.Next());
-
-    if (i == 4)
+    for (int i = 0; i < 5; i++)
     {
-        Thread.Sleep(2000);
-        i = 0;
-        Console.Clear();
-    }
 
+        //DotNetSort();
+        BubbleSort();
+
+        var rnd = new Random();
+        var randomized = wordList.OrderBy(item => rnd.Next());
+
+    }
+    Thread.Sleep(1000);
+    Console.Clear();
 }
 
 //the standard dotnet algo
@@ -63,13 +61,10 @@ void BubbleSort()
 
     sw.Stop();
     TimeSpan ts = sw.Elapsed;
-    if(firstRun)
-    {
-        Console.WriteLine("Sort Time BubbleSort: " + ts.TotalMilliseconds);
-    }
+
+    Console.WriteLine("Sort Time BubbleSort: " + ts.TotalMilliseconds);
 
     sw.Restart();
-    firstRun = true;
     //Console.Read();
 }
 
